@@ -1,0 +1,76 @@
+# Copyright (C) 2026 Stephen Kinzey, Ph.D.
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Hide Product Category Archives 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hide-product-category-archives\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-01-10T10:46:37+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: hide-product-category-archives\n"
+
+#. Plugin Name of the plugin
+#: hide-product-category-archives.php
+msgid "Hide Product Category Archives"
+msgstr ""
+
+#. Description of the plugin
+#: hide-product-category-archives.php
+msgid "Adds a per-product-category setting to hide a product category archive (301 redirect to Shop) while keeping products visible elsewhere."
+msgstr ""
+
+#. Author of the plugin
+#: hide-product-category-archives.php
+msgid "Stephen Kinzey, Ph.D."
+msgstr ""
+
+#. Author URI of the plugin
+#: hide-product-category-archives.php
+msgid "https://sk-america.com"
+msgstr ""
+
+#: hide-product-category-archives.php:69
+msgid "Settings"
+msgstr ""
+
+#: hide-product-category-archives.php:82
+#: hide-product-category-archives.php:99
+msgid "Hide category archive (redirect to Shop)"
+msgstr ""
+
+#: hide-product-category-archives.php:86
+msgid "If checked, visitors who open this product category archive will be redirected to the Shop page."
+msgstr ""
+
+#: hide-product-category-archives.php:105
+msgid "Redirect this category archive to the Shop page."
+msgstr ""
+
+#: hide-product-category-archives.php:108
+msgid "Products remain visible elsewhere unless you exclude them from other categories."
+msgstr ""
+
+#: hide-product-category-archives.php:171
+msgid "Hidden archive"
+msgstr ""
+
+#: hide-product-category-archives.php:184
+msgid "Yes"
+msgstr ""
+
+#: hide-product-category-archives.php:185
+msgid "No"
+msgstr ""
+
+#: hide-product-category-archives.php:200
+msgid "Unhide"
+msgstr ""
+
+#: hide-product-category-archives.php:201
+msgid "Hide"
+msgstr ""
