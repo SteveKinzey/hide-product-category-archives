@@ -7,3 +7,4 @@ node_modules/
 vendor/
 languages/*.mo
 languages/*.po.DS_Store
+.DS_Store
