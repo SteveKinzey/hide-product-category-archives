@@ -6,4 +6,4 @@ Thumbs.db
 node_modules/
 vendor/
 languages/*.mo
-languages/*.po
+languages/*.po.DS_Store
