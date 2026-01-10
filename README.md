@@ -1,5 +1,11 @@
 # Hide Product Category Archives
 
+![License](https://img.shields.io/github/license/SteveKinzey/hide-product-category-archives?style=flat-square)
+![Latest Release](https://img.shields.io/github/v/release/SteveKinzey/hide-product-category-archives?style=flat-square)
+![Downloads](https://img.shields.io/github/downloads/SteveKinzey/hide-product-category-archives/total?style=flat-square)
+![Last Commit](https://img.shields.io/github/last-commit/SteveKinzey/hide-product-category-archives?style=flat-square)
+![Issues](https://img.shields.io/github/issues/SteveKinzey/hide-product-category-archives?style=flat-square)
+
 Adds a per-product-category checkbox in WooCommerce that redirects visitors away from that product category archive to the Shop page, while keeping products visible via other categories, search, and facets.
 
 ## Features
