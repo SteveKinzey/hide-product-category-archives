@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Hide Product Category Archives
  * Description: Adds a per-product-category setting to hide a product category archive (301 redirect to Shop) while keeping products visible elsewhere.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Stephen Kinzey, Ph.D.
  * Author URI: https://sk-america.com
  * License: GPL-2.0-or-later
@@ -233,3 +233,128 @@ final class Hide_Product_Category_Archives {
 }
 
 Hide_Product_Category_Archives::init();
+
+// WP-CLI commands: wp hpc hide|unhide|status|list <slug>
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+
+	class HPC_WP_CLI_Command {
+
+		/**
+		 * Hide a WooCommerce product category archive (redirect to Shop).
+		 *
+		 * ## OPTIONS
+		 *
+		 * <slug>
+		 * : Product category slug.
+		 *
+		 * ## EXAMPLES
+		 *
+		 * wp hpc hide dekit
+		 */
+		public function hide( $args ) {
+			$this->set_hidden( $args[0], 1 );
+		}
+
+		/**
+		 * Unhide a WooCommerce product category archive.
+		 *
+		 * ## OPTIONS
+		 *
+		 * <slug>
+		 * : Product category slug.
+		 *
+		 * ## EXAMPLES
+		 *
+		 * wp hpc unhide dekit
+		 */
+		public function unhide( $args ) {
+			$this->set_hidden( $args[0], 0 );
+		}
+
+		/**
+		 * Show hidden status for a product category slug.
+		 *
+		 * ## OPTIONS
+		 *
+		 * <slug>
+		 * : Product category slug.
+		 *
+		 * ## EXAMPLES
+		 *
+		 * wp hpc status dekit
+		 */
+		public function status( $args ) {
+			$slug = (string) $args[0];
+			$term = get_term_by( 'slug', $slug, 'product_cat' );
+
+			if ( ! $term || is_wp_error( $term ) ) {
+				WP_CLI::error( 'Category not found: ' . $slug );
+			}
+
+			$hidden = (int) get_term_meta( $term->term_id, Hide_Product_Category_Archives::META_KEY, true );
+
+			WP_CLI::success( sprintf(
+				'%s (%s) => hidden_archive=%s',
+				$term->name,
+				$term->slug,
+				$hidden ? 'yes' : 'no'
+			) );
+		}
+
+		/**
+		 * List all hidden product category archives.
+		 *
+		 * ## EXAMPLES
+		 *
+		 * wp hpc list
+		 */
+		public function list() {
+			$terms = get_terms( [
+				'taxonomy'   => 'product_cat',
+				'hide_empty' => false,
+			] );
+
+			if ( is_wp_error( $terms ) ) {
+				WP_CLI::error( $terms->get_error_message() );
+			}
+
+			$rows = [];
+			foreach ( $terms as $term ) {
+				$hidden = (int) get_term_meta( $term->term_id, Hide_Product_Category_Archives::META_KEY, true );
+				if ( $hidden ) {
+					$rows[] = [
+						'id'   => $term->term_id,
+						'slug' => $term->slug,
+						'name' => $term->name,
+					];
+				}
+			}
+
+			if ( empty( $rows ) ) {
+				WP_CLI::success( 'No hidden category archives found.' );
+				return;
+			}
+
+			WP_CLI\Utils\format_items( 'table', $rows, [ 'id', 'slug', 'name' ] );
+		}
+
+		private function set_hidden( string $slug, int $value ): void {
+			$term = get_term_by( 'slug', $slug, 'product_cat' );
+
+			if ( ! $term || is_wp_error( $term ) ) {
+				WP_CLI::error( 'Category not found: ' . $slug );
+			}
+
+			update_term_meta( $term->term_id, Hide_Product_Category_Archives::META_KEY, $value ? 1 : 0 );
+
+			WP_CLI::success( sprintf(
+				'%s (%s) => hidden_archive=%s',
+				$term->name,
+				$term->slug,
+				$value ? 'yes' : 'no'
+			) );
+		}
+	}
+
+	WP_CLI::add_command( 'hpc', 'HPC_WP_CLI_Command' );
+}
