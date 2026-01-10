@@ -1,9 +1,4 @@
 {
   "release-type": "simple",
-  "changelog-path": "CHANGELOG.md",
-  "packages": {
-    ".": {
-      "package-name": "hide-product-category-archives"
-    }
-  }
+  "changelog-path": "CHANGELOG.md"
 }
